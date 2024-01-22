@@ -1,7 +1,7 @@
 {
     "name": "pkdev/traits",
     "description": "Traits developed by PkDev for use in all projects",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "type": "library",
     "autoload": {
         "psr-4": {
