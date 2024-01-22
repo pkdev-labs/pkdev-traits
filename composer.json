@@ -26,11 +26,11 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/WyldHalfling/PkDevTraits"
+            "url": "https://github.com/pkdev-labs/pkdev-traits"
         }
     ],
     "support": {
-        "issues": "https://github.com/WyldHalfling/PkDevTraits/issues",
-        "source": "https://github.com/WyldHalfling/PkDevTraits"
+        "issues": "https://github.com/pkdev-labs/pkdev-traits/issues",
+        "source": "https://github.com/pkdev-labs/pkdev-traits"
     }
 }
