@@ -6,7 +6,7 @@ use DateTime;
 
 trait DateTrait
 {
-    public function formatDate($date = null, $format = 'Y-m-d')
+    public static function formatDate($date = null, $format = 'Y-m-d')
     {
         if ($date instanceof DateTime) {
             return $date->format($format);
@@ -19,7 +19,7 @@ trait DateTrait
         return $date->format($format);
     }
 
-    public function addDaysToDate($date, $days, $format = 'Y-m-d')
+    public static function addDaysToDate($date, $days, $format = 'Y-m-d')
     {
         $dateObj = new DateTime($date);
 
@@ -29,24 +29,24 @@ trait DateTrait
             $dateObj->modify($days . ' days');
         }
 
-        return $this->formatDate($dateObj, $format);
+        return self::formatDate($dateObj, $format);
     }
 
-    public function isFutureDate($date)
+    public static function isFutureDate($date)
     {
         $currentDate = new DateTime();
         $inputDate = new DateTime($date);
         return $inputDate > $currentDate;
     }
 
-    public function isPastDate($date)
+    public static function isPastDate($date)
     {
         $currentDate = new DateTime();
         $inputDate = new DateTime($date);
         return $inputDate < $currentDate;
     }
 
-    public function getDaysDifference($date1, $date2)
+    public static function getDaysDifference($date1, $date2)
     {
         $dateObj1 = new DateTime($date1);
         $dateObj2 = new DateTime($date2);
@@ -54,14 +54,14 @@ trait DateTrait
         return $interval->days;
     }
 
-    public function areDatesEqual($date1, $date2)
+    public static function areDatesEqual($date1, $date2)
     {
         $dateObj1 = new DateTime($date1);
         $dateObj2 = new DateTime($date2);
         return $dateObj1 == $dateObj2;
     }
 
-    public function isWeekend($date)
+    public static function isWeekend($date)
     {
         $dateObj = new DateTime($date);
         $dayOfWeek = $dateObj->format('N');

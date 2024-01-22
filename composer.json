@@ -20,5 +20,17 @@
     "scripts": {
         "test": "vendor/bin/phpunit tests",
         "test-coverage": "vendor/bin/phpunit tests --coverage-html coverage"
+    },
+    "keywords": ["traits", "php"],
+    "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/WyldHalfling/PkDevTraits"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/WyldHalfling/PkDevTraits/issues",
+        "source": "https://github.com/WyldHalfling/PkDevTraits"
     }
 }
