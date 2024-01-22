@@ -32,5 +32,8 @@
     "support": {
         "issues": "https://github.com/pkdev-labs/pkdev-traits/issues",
         "source": "https://github.com/pkdev-labs/pkdev-traits"
+    },
+    "require": {
+        "pkdev/traits": "^1.0"
     }
 }
