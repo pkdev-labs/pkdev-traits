@@ -6,7 +6,13 @@ use DateTime;
 
 trait DateTrait
 {
-    public static function formatDate($date = null, $format = 'Y-m-d')
+    /**
+     * @param $date
+     * @param $format
+     * @return string
+     * @throws \Exception
+     */
+    public static function formatDate($date = null, $format = 'Y-m-d'): string
     {
         if ($date instanceof DateTime) {
             return $date->format($format);
@@ -19,7 +25,14 @@ trait DateTrait
         return $date->format($format);
     }
 
-    public static function addDaysToDate($date, $days, $format = 'Y-m-d')
+    /**
+     * @param $date
+     * @param $days
+     * @param $format
+     * @return string
+     * @throws \Exception
+     */
+    public static function addDaysToDate($date, $days, $format = 'Y-m-d'): string
     {
         $dateObj = new DateTime($date);
 
@@ -32,21 +45,37 @@ trait DateTrait
         return self::formatDate($dateObj, $format);
     }
 
-    public static function isFutureDate($date)
+    /**
+     * @param $date
+     * @return bool
+     * @throws \Exception
+     */
+    public static function isFutureDate($date): bool
     {
         $currentDate = new DateTime();
         $inputDate = new DateTime($date);
         return $inputDate > $currentDate;
     }
 
-    public static function isPastDate($date)
+    /**
+     * @param $date
+     * @return bool
+     * @throws \Exception
+     */
+    public static function isPastDate($date): bool
     {
         $currentDate = new DateTime();
         $inputDate = new DateTime($date);
         return $inputDate < $currentDate;
     }
 
-    public static function getDaysDifference($date1, $date2)
+    /**
+     * @param $date1
+     * @param $date2
+     * @return false|int
+     * @throws \Exception
+     */
+    public static function getDaysDifference($date1, $date2): int|false
     {
         $dateObj1 = new DateTime($date1);
         $dateObj2 = new DateTime($date2);
@@ -54,14 +83,25 @@ trait DateTrait
         return $interval->days;
     }
 
-    public static function areDatesEqual($date1, $date2)
+    /**
+     * @param $date1
+     * @param $date2
+     * @return bool
+     * @throws \Exception
+     */
+    public static function areDatesEqual($date1, $date2): bool
     {
         $dateObj1 = new DateTime($date1);
         $dateObj2 = new DateTime($date2);
         return $dateObj1 == $dateObj2;
     }
 
-    public static function isWeekend($date)
+    /**
+     * @param $date
+     * @return bool
+     * @throws \Exception
+     */
+    public static function isWeekend($date): bool
     {
         $dateObj = new DateTime($date);
         $dayOfWeek = $dateObj->format('N');

@@ -4,7 +4,12 @@ namespace PkDev\Traits;
 
 trait HelperTrait
 {
-    public static function generateRandomString($length = 10)
+    /**
+     * Generates a random string
+     * @param $length
+     * @return string
+     */
+    public static function generateRandomString($length = 10): string
     {
         $characters = array_merge(range('a', 'z'), range('A', 'Z'), range(0, 9));
         $randomString = '';

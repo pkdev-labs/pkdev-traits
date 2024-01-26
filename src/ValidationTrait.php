@@ -4,7 +4,12 @@ namespace PkDev\Traits;
 
 trait ValidationTrait
 {
-    public static function validateRequired($value)
+    /**
+     * Validates if required and present
+     * @param $value
+     * @return bool
+     */
+    public static function validateRequired($value): bool
     {
         if (is_array($value) || is_object($value)) {
             return !empty($value);
@@ -13,32 +18,64 @@ trait ValidationTrait
         return isset($value) && !empty(trim($value));
     }
 
-    public static function validateEmail($value)
+    /**
+     * Validates email address
+     * @param $value
+     * @return bool
+     */
+    public static function validateEmail($value): bool
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
     }
 
-    public static function validateNumeric($value)
+    /**
+     * Validates if numeric
+     * @param $value
+     * @return bool
+     */
+    public static function validateNumeric($value): bool
     {
         return is_numeric($value);
     }
 
-    public static function validateInteger($value)
+    /**
+     * Validates if integer
+     * @param $value
+     * @return bool
+     */
+    public static function validateInteger($value): bool
     {
         return filter_var($value, FILTER_VALIDATE_INT) !== false;
     }
 
-    public static function validateFloat($value)
+    /**
+     * Validates if float
+     * @param $value
+     * @return bool
+     */
+    public static function validateFloat($value): bool
     {
         return filter_var($value, FILTER_VALIDATE_FLOAT) !== false;
     }
 
-    public static function validateMaxLength($value, $maxLength)
+    /**
+     * Validates if less than max length
+     * @param $value
+     * @param $maxLength
+     * @return bool
+     */
+    public static function validateMaxLength($value, $maxLength): bool
     {
         return strlen($value) <= $maxLength;
     }
 
-    public static function validateMinLength($value, $minLength)
+    /**
+     * Validates if more than min length
+     * @param $value
+     * @param $minLength
+     * @return bool
+     */
+    public static function validateMinLength($value, $minLength): bool
     {
         return strlen($value) >= $minLength;
     }
