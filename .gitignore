@@ -5,4 +5,4 @@
 composer.lock
 phpunit.xml
 phpunit.xml.bak
-/tests/coverage
+/tests/coverage/
