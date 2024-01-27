@@ -1,12 +1,15 @@
 {
     "name": "pkdev/traits",
     "description": "Traits developed by PkDev for use in all projects",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "type": "library",
     "autoload": {
         "psr-4": {
             "PkDev\\Traits\\": "src/"
         }
+    },
+    "require": {
+        "php": "^8.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5"
