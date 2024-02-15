@@ -1,7 +1,7 @@
 {
     "name": "pkdev/traits",
     "description": "Traits developed by PkDev for use in all projects",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "type": "library",
     "autoload": {
         "psr-4": {
@@ -9,7 +9,8 @@
         }
     },
     "require": {
-        "php": "^8.1"
+        "php": "^8.2",
+        "ext-openssl": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5"
