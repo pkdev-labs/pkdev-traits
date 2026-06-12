@@ -10,16 +10,6 @@ use PkDev\Traits\DateTrait;
 class DateTraitTest extends TestCase
 {
     use DateTrait;
-    
-    private $trait;
-
-    public function __construct(string $name)
-    {
-        parent::__construct($name);
-        $this->trait = new class {
-            use DateTrait;
-        };
-    }
 
     /* Format Date Tests */
     public function testFormatDateWithSpecificDate(): void

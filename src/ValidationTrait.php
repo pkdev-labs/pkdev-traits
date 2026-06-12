@@ -66,7 +66,7 @@ trait ValidationTrait
      */
     public static function validateMaxLength($value, $maxLength): bool
     {
-        return strlen($value) <= $maxLength;
+        return strlen((string) $value) <= $maxLength;
     }
 
     /**
@@ -77,6 +77,6 @@ trait ValidationTrait
      */
     public static function validateMinLength($value, $minLength): bool
     {
-        return strlen($value) >= $minLength;
+        return strlen((string) $value) >= $minLength;
     }
 }
