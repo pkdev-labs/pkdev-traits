@@ -4,7 +4,7 @@
 
 <p align="center">
 
-![CircleCI](https://github.com/pkdev-labs/pkdev-traits/actions/workflows/phpunit-tests.yml/badge.svg)
+![Tests](https://github.com/pkdev-labs/pkdev-traits/actions/workflows/phpunit-tests.yml/badge.svg)
 
 </p>
 
@@ -22,11 +22,11 @@ Welcome to PkDev Traits – an open-source initiative designed to streamline and
 
 To explore and run this project locally:
 
-1. Use the repository:
+1. Install the package:
    ```bash
    composer require pkdev/traits
     ```
-2. Use the repository:
+2. Use the trait:
    ```bash
    use PkDev\Traits\ValidationTrait;
    
