@@ -1,81 +1,67 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PkDev\Traits;
 
 trait ValidationTrait
 {
     /**
-     * Validates if required and present
-     * @param $value
-     * @return bool
+     * Validates that a value is present and not empty.
      */
-    public static function validateRequired($value): bool
+    public static function validateRequired(mixed $value): bool
     {
         if (is_array($value) || is_object($value)) {
             return !empty($value);
         }
 
-        return isset($value) && !empty(trim($value));
+        return is_scalar($value) && !empty(trim((string) $value));
     }
 
     /**
-     * Validates email address
-     * @param $value
-     * @return bool
+     * Validates an email address.
      */
-    public static function validateEmail($value): bool
+    public static function validateEmail(mixed $value): bool
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL) !== false;
     }
 
     /**
-     * Validates if numeric
-     * @param $value
-     * @return bool
+     * Validates that a value is numeric.
      */
-    public static function validateNumeric($value): bool
+    public static function validateNumeric(mixed $value): bool
     {
         return is_numeric($value);
     }
 
     /**
-     * Validates if integer
-     * @param $value
-     * @return bool
+     * Validates that a value is an integer.
      */
-    public static function validateInteger($value): bool
+    public static function validateInteger(mixed $value): bool
     {
         return filter_var($value, FILTER_VALIDATE_INT) !== false;
     }
 
     /**
-     * Validates if float
-     * @param $value
-     * @return bool
+     * Validates that a value is a float.
      */
-    public static function validateFloat($value): bool
+    public static function validateFloat(mixed $value): bool
     {
         return filter_var($value, FILTER_VALIDATE_FLOAT) !== false;
     }
 
     /**
-     * Validates if less than max length
-     * @param $value
-     * @param $maxLength
-     * @return bool
+     * Validates that a value does not exceed a maximum length.
      */
-    public static function validateMaxLength($value, $maxLength): bool
+    public static function validateMaxLength(string|int|float|null $value, int $maxLength): bool
     {
         return strlen((string) $value) <= $maxLength;
     }
 
     /**
-     * Validates if more than min length
-     * @param $value
-     * @param $minLength
-     * @return bool
+     * Validates that a value meets a minimum length.
      */
-    public static function validateMinLength($value, $minLength): bool
+    public static function validateMinLength(string|int|float|null $value, int $minLength): bool
     {
         return strlen((string) $value) >= $minLength;
     }

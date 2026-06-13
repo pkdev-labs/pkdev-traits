@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  tests:
 
     runs-on: ubuntu-latest
 
@@ -28,7 +28,7 @@ jobs:
       with:
         php-version: ${{ matrix.php-version }}
         extensions: openssl
-        coverage: none
+        coverage: pcov
 
     - name: Cache Composer packages
       id: composer-cache
@@ -42,5 +42,26 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    - name: Run test suite
-      run: composer test
+    - name: Run test suite with coverage
+      run: vendor/bin/phpunit --coverage-clover=coverage.xml --coverage-text
+
+    - name: Enforce 100% line coverage
+      run: |
+        php -r '
+          $xml = simplexml_load_file("coverage.xml");
+          $m = $xml->project->metrics;
+          $covered = (int) $m["coveredstatements"];
+          $total = (int) $m["statements"];
+          $pct = $total ? ($covered / $total) * 100 : 100;
+          printf("Line coverage: %.2f%% (%d/%d)\n", $pct, $covered, $total);
+          if ($pct < 100) { fwrite(STDERR, "Coverage is below 100%\n"); exit(1); }
+        '
+
+    - name: Upload coverage to Codecov
+      if: matrix.php-version == '8.5'
+      uses: codecov/codecov-action@v5
+      with:
+        files: ./coverage.xml
+        fail_ci_if_error: false
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

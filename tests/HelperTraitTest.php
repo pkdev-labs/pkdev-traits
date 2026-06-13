@@ -9,20 +9,20 @@ class HelperTraitTest extends TestCase
 {
     use HelperTrait;
 
-    public function testGenerateRandomStringDefaultLength()
+    public function testGenerateRandomStringDefaultLength(): void
     {
         $randomString = self::generateRandomString();
         $this->assertEquals(10, strlen($randomString));
     }
 
-    public function testGenerateRandomStringCustomLength()
+    public function testGenerateRandomStringCustomLength(): void
     {
         $length = 15;
         $randomString = self::generateRandomString($length);
         $this->assertEquals($length, strlen($randomString));
     }
 
-    public function testGenerateRandomStringContainsValidCharacters()
+    public function testGenerateRandomStringContainsValidCharacters(): void
     {
         $randomString = self::generateRandomString(20);
         $validCharacters = array_merge(range('a', 'z'), range('A', 'Z'), array_map('strval', range(0, 9)));
@@ -32,11 +32,11 @@ class HelperTraitTest extends TestCase
         }
     }
 
-    public function testGenerateRandomStringDoesNotExceedValidCharacters()
+    public function testGenerateRandomStringDoesNotExceedValidCharacters(): void
     {
         $length = 100;
         $randomString = self::generateRandomString($length);
-        $validCharacters = array_merge(range('a', 'z'), range('A', 'Z'), range(0, 9));
+        $validCharacters = array_merge(range('a', 'z'), range('A', 'Z'), range('0', '9'));
 
         $invalidCharacters = str_replace($validCharacters, '', $randomString);
         $this->assertEmpty($invalidCharacters, 'Random string contains invalid characters.');

@@ -11,85 +11,85 @@ class ValidationTraitTest extends TestCase
     use ValidationTrait;
 
     /* Validate Required Tests */
-    public function testValidateRequiredWithEmptyString()
+    public function testValidateRequiredWithEmptyString(): void
     {
         $result = self::validateRequired('');
         $this->assertFalse($result);
     }
 
-    public function testValidateRequiredWithWhitespaceString()
+    public function testValidateRequiredWithWhitespaceString(): void
     {
         $result = self::validateRequired('   ');
         $this->assertFalse($result);
     }
 
-    public function testValidateRequiredWithNull()
+    public function testValidateRequiredWithNull(): void
     {
         $result = self::validateRequired(null);
         $this->assertFalse($result);
     }
 
-    public function testValidateRequiredWithZero()
+    public function testValidateRequiredWithZero(): void
     {
         $result = self::validateRequired(0);
         $this->assertFalse($result);
     }
 
-    public function testValidateRequiredWithNonEmptyString()
+    public function testValidateRequiredWithNonEmptyString(): void
     {
         $result = self::validateRequired('Hello');
         $this->assertTrue($result);
     }
 
-    public function testValidateRequiredWithArray()
+    public function testValidateRequiredWithArray(): void
     {
         $result = self::validateRequired(['item1', 'item2']);
         $this->assertTrue($result);
     }
 
-    public function testValidateRequiredWithObject()
+    public function testValidateRequiredWithObject(): void
     {
         $result = self::validateRequired(new stdClass());
         $this->assertTrue($result);
     }
 
     /* Validate Email Tests */
-    public function testValidateEmailWithValidEmail()
+    public function testValidateEmailWithValidEmail(): void
     {
         $validEmail = 'user@example.com';
         $result = self::validateEmail($validEmail);
         $this->assertTrue($result);
     }
 
-    public function testValidateEmailWithInvalidEmail()
+    public function testValidateEmailWithInvalidEmail(): void
     {
         $invalidEmail = 'invalid-email';
         $result = self::validateEmail($invalidEmail);
         $this->assertFalse($result);
     }
 
-    public function testValidateEmailWithEmptyValue()
+    public function testValidateEmailWithEmptyValue(): void
     {
         $emptyEmail = '';
         $result = self::validateEmail($emptyEmail);
         $this->assertFalse($result);
     }
 
-    public function testValidateEmailWithNullValue()
+    public function testValidateEmailWithNullValue(): void
     {
         $nullEmail = null;
         $result = self::validateEmail($nullEmail);
         $this->assertFalse($result);
     }
 
-    public function testValidateEmailWithArray()
+    public function testValidateEmailWithArray(): void
     {
         $emailArray = ['user@example.com'];
         $result = self::validateEmail($emailArray);
         $this->assertFalse($result);
     }
 
-    public function testValidateEmailWithObject()
+    public function testValidateEmailWithObject(): void
     {
         $emailObject = (object)['email' => 'user@example.com'];
         $result = self::validateEmail($emailObject);
@@ -97,42 +97,42 @@ class ValidationTraitTest extends TestCase
     }
 
     /* Validate Numeric Tests */
-    public function testValidateNumericWithValidNumeric()
+    public function testValidateNumericWithValidNumeric(): void
     {
         $validNumeric = 123;
         $result = self::validateNumeric($validNumeric);
         $this->assertTrue($result);
     }
 
-    public function testValidateNumericWithInvalidNumeric()
+    public function testValidateNumericWithInvalidNumeric(): void
     {
         $invalidNumeric = 'abc';
         $result = self::validateNumeric($invalidNumeric);
         $this->assertFalse($result);
     }
 
-    public function testValidateNumericWithEmptyValue()
+    public function testValidateNumericWithEmptyValue(): void
     {
         $emptyValue = '';
         $result = self::validateNumeric($emptyValue);
         $this->assertFalse($result);
     }
 
-    public function testValidateNumericWithNullValue()
+    public function testValidateNumericWithNullValue(): void
     {
         $nullValue = null;
         $result = self::validateNumeric($nullValue);
         $this->assertFalse($result);
     }
 
-    public function testValidateNumericWithArray()
+    public function testValidateNumericWithArray(): void
     {
         $numericArray = [123];
         $result = self::validateNumeric($numericArray);
         $this->assertFalse($result);
     }
 
-    public function testValidateNumericWithObject()
+    public function testValidateNumericWithObject(): void
     {
         $numericObject = (object)['value' => 123];
         $result = self::validateNumeric($numericObject);
@@ -140,42 +140,42 @@ class ValidationTraitTest extends TestCase
     }
 
     /* Validate Integer Tests */
-    public function testValidateIntegerWithValidInteger()
+    public function testValidateIntegerWithValidInteger(): void
     {
         $validInteger = 123;
         $result = self::validateInteger($validInteger);
         $this->assertTrue($result);
     }
 
-    public function testValidateIntegerWithInvalidInteger()
+    public function testValidateIntegerWithInvalidInteger(): void
     {
         $invalidInteger = 'abc';
         $result = self::validateInteger($invalidInteger);
         $this->assertFalse($result);
     }
 
-    public function testValidateIntegerWithEmptyValue()
+    public function testValidateIntegerWithEmptyValue(): void
     {
         $emptyValue = '';
         $result = self::validateInteger($emptyValue);
         $this->assertFalse($result);
     }
 
-    public function testValidateIntegerWithNullValue()
+    public function testValidateIntegerWithNullValue(): void
     {
         $nullValue = null;
         $result = self::validateInteger($nullValue);
         $this->assertFalse($result);
     }
 
-    public function testValidateIntegerWithArray()
+    public function testValidateIntegerWithArray(): void
     {
         $integerArray = [123];
         $result = self::validateInteger($integerArray);
         $this->assertFalse($result);
     }
 
-    public function testValidateIntegerWithObject()
+    public function testValidateIntegerWithObject(): void
     {
         $integerObject = (object)['value' => 123];
         $result = self::validateInteger($integerObject);
@@ -183,42 +183,42 @@ class ValidationTraitTest extends TestCase
     }
 
     /* Validate Float Tests */
-    public function testValidateFloatWithValidFloat()
+    public function testValidateFloatWithValidFloat(): void
     {
         $validFloat = 123.45;
         $result = self::validateFloat($validFloat);
         $this->assertTrue($result);
     }
 
-    public function testValidateFloatWithInvalidFloat()
+    public function testValidateFloatWithInvalidFloat(): void
     {
         $invalidFloat = 'abc';
         $result = self::validateFloat($invalidFloat);
         $this->assertFalse($result);
     }
 
-    public function testValidateFloatWithEmptyValue()
+    public function testValidateFloatWithEmptyValue(): void
     {
         $emptyValue = '';
         $result = self::validateFloat($emptyValue);
         $this->assertFalse($result);
     }
 
-    public function testValidateFloatWithNullValue()
+    public function testValidateFloatWithNullValue(): void
     {
         $nullValue = null;
         $result = self::validateFloat($nullValue);
         $this->assertFalse($result);
     }
 
-    public function testValidateFloatWithArray()
+    public function testValidateFloatWithArray(): void
     {
         $floatArray = [123.45];
         $result = self::validateFloat($floatArray);
         $this->assertFalse($result);
     }
 
-    public function testValidateFloatWithObject()
+    public function testValidateFloatWithObject(): void
     {
         $floatObject = (object)['value' => 123.45];
         $result = self::validateFloat($floatObject);
@@ -226,7 +226,7 @@ class ValidationTraitTest extends TestCase
     }
 
     /* Validate Max Length Tests */
-    public function testValidateMaxLengthWithShorterValue()
+    public function testValidateMaxLengthWithShorterValue(): void
     {
         $value = 'short';
         $maxLength = 10;
@@ -234,7 +234,7 @@ class ValidationTraitTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testValidateMaxLengthWithEqualValue()
+    public function testValidateMaxLengthWithEqualValue(): void
     {
         $value = 'equal';
         $maxLength = 5;
@@ -242,7 +242,7 @@ class ValidationTraitTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testValidateMaxLengthWithLongerValue()
+    public function testValidateMaxLengthWithLongerValue(): void
     {
         $value = 'toolong';
         $maxLength = 5;
@@ -250,7 +250,7 @@ class ValidationTraitTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public function testValidateMaxLengthWithEmptyValue()
+    public function testValidateMaxLengthWithEmptyValue(): void
     {
         $value = '';
         $maxLength = 5;
@@ -258,7 +258,7 @@ class ValidationTraitTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testValidateMaxLengthWithNullValue()
+    public function testValidateMaxLengthWithNullValue(): void
     {
         $value = null;
         $maxLength = 5;
@@ -267,7 +267,7 @@ class ValidationTraitTest extends TestCase
     }
 
     /* Validate Min Length Tests */
-    public function testValidateMinLengthWithShorterValue()
+    public function testValidateMinLengthWithShorterValue(): void
     {
         $value = 'short';
         $minLength = 6;
@@ -275,7 +275,7 @@ class ValidationTraitTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public function testValidateMinLengthWithEqualValue()
+    public function testValidateMinLengthWithEqualValue(): void
     {
         $value = 'equal';
         $minLength = 5;
@@ -283,7 +283,7 @@ class ValidationTraitTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testValidateMinLengthWithLongerValue()
+    public function testValidateMinLengthWithLongerValue(): void
     {
         $value = 'longer';
         $minLength = 5;
@@ -291,7 +291,7 @@ class ValidationTraitTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testValidateMinLengthWithEmptyValue()
+    public function testValidateMinLengthWithEmptyValue(): void
     {
         $value = '';
         $minLength = 5;
@@ -299,7 +299,7 @@ class ValidationTraitTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public function testValidateMinLengthWithNullValue()
+    public function testValidateMinLengthWithNullValue(): void
     {
         $value = null;
         $minLength = 5;

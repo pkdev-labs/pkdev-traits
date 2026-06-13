@@ -1,38 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PkDev\Traits;
 
 trait ArrayTrait
 {
     /**
-     * Retrieves a value from a nested array using dot notation
-     * @param array $array
-     * @param string $key
-     * @param $default
-     * @return mixed
+     * Retrieves a value from a nested array using dot notation.
+     *
+     * @param array<array-key, mixed> $array
      */
-    public static function get(array $array, string $key, $default = null): mixed
+    public static function get(array $array, string $key, mixed $default = null): mixed
     {
         if (array_key_exists($key, $array)) {
             return $array[$key];
         }
 
+        $value = $array;
         foreach (explode('.', $key) as $segment) {
-            if (is_array($array) && array_key_exists($segment, $array)) {
-                $array = $array[$segment];
+            if (is_array($value) && array_key_exists($segment, $value)) {
+                $value = $value[$segment];
             } else {
                 return $default;
             }
         }
 
-        return $array;
+        return $value;
     }
 
     /**
-     * Determines if a nested key exists using dot notation
-     * @param array $array
-     * @param string $key
-     * @return bool
+     * Determines if a nested key exists using dot notation.
+     *
+     * @param array<array-key, mixed> $array
      */
     public static function has(array $array, string $key): bool
     {
@@ -40,9 +40,10 @@ trait ArrayTrait
             return true;
         }
 
+        $value = $array;
         foreach (explode('.', $key) as $segment) {
-            if (is_array($array) && array_key_exists($segment, $array)) {
-                $array = $array[$segment];
+            if (is_array($value) && array_key_exists($segment, $value)) {
+                $value = $value[$segment];
             } else {
                 return false;
             }
@@ -52,37 +53,31 @@ trait ArrayTrait
     }
 
     /**
-     * Sets a value in a nested array using dot notation and returns the result
-     * @param array $array
-     * @param string $key
-     * @param $value
-     * @return array
+     * Sets a value in a nested array using dot notation and returns the result.
+     *
+     * @param array<array-key, mixed> $array
+     * @return array<array-key, mixed>
      */
-    public static function set(array $array, string $key, $value): array
+    public static function set(array $array, string $key, mixed $value): array
     {
         $segments = explode('.', $key);
-        $ref = &$array;
+        $segment = array_shift($segments);
 
-        foreach ($segments as $i => $segment) {
-            if ($i === count($segments) - 1) {
-                $ref[$segment] = $value;
-            } else {
-                if (!isset($ref[$segment]) || !is_array($ref[$segment])) {
-                    $ref[$segment] = [];
-                }
-                $ref = &$ref[$segment];
-            }
+        if ($segments === []) {
+            $array[$segment] = $value;
+            return $array;
         }
-        unset($ref);
 
+        $child = isset($array[$segment]) && is_array($array[$segment]) ? $array[$segment] : [];
+        $array[$segment] = self::set($child, implode('.', $segments), $value);
         return $array;
     }
 
     /**
-     * Extracts a single column of values from an array of rows
-     * @param array $array
-     * @param string $key
-     * @return array
+     * Extracts a single column of values from an array of rows.
+     *
+     * @param array<array-key, mixed> $array
+     * @return list<mixed>
      */
     public static function pluck(array $array, string $key): array
     {
@@ -99,12 +94,11 @@ trait ArrayTrait
     }
 
     /**
-     * Returns the first element of an array, or a default when empty
-     * @param array $array
-     * @param $default
-     * @return mixed
+     * Returns the first element of an array, or a default when empty.
+     *
+     * @param array<array-key, mixed> $array
      */
-    public static function first(array $array, $default = null): mixed
+    public static function first(array $array, mixed $default = null): mixed
     {
         foreach ($array as $item) {
             return $item;
@@ -114,12 +108,11 @@ trait ArrayTrait
     }
 
     /**
-     * Returns the last element of an array, or a default when empty
-     * @param array $array
-     * @param $default
-     * @return mixed
+     * Returns the last element of an array, or a default when empty.
+     *
+     * @param array<array-key, mixed> $array
      */
-    public static function last(array $array, $default = null): mixed
+    public static function last(array $array, mixed $default = null): mixed
     {
         if (empty($array)) {
             return $default;
@@ -129,25 +122,31 @@ trait ArrayTrait
     }
 
     /**
-     * Flattens a multi-dimensional array into a single dimension of values
-     * @param array $array
-     * @return array
+     * Flattens a multi-dimensional array into a single dimension of values.
+     *
+     * @param array<array-key, mixed> $array
+     * @return list<mixed>
      */
     public static function flatten(array $array): array
     {
         $result = [];
-        array_walk_recursive($array, function ($item) use (&$result) {
-            $result[] = $item;
-        });
+        foreach ($array as $item) {
+            if (is_array($item)) {
+                $result = array_merge($result, self::flatten($item));
+            } else {
+                $result[] = $item;
+            }
+        }
 
         return $result;
     }
 
     /**
-     * Returns only the given keys from an array
-     * @param array $array
-     * @param array $keys
-     * @return array
+     * Returns only the given keys from an array.
+     *
+     * @param array<array-key, mixed> $array
+     * @param list<array-key> $keys
+     * @return array<array-key, mixed>
      */
     public static function only(array $array, array $keys): array
     {
@@ -155,10 +154,11 @@ trait ArrayTrait
     }
 
     /**
-     * Returns the array without the given keys
-     * @param array $array
-     * @param array $keys
-     * @return array
+     * Returns the array without the given keys.
+     *
+     * @param array<array-key, mixed> $array
+     * @param list<array-key> $keys
+     * @return array<array-key, mixed>
      */
     public static function except(array $array, array $keys): array
     {
@@ -166,16 +166,17 @@ trait ArrayTrait
     }
 
     /**
-     * Groups an array of rows by the value of a given key
-     * @param array $array
-     * @param string $key
-     * @return array
+     * Groups an array of rows by the value of a given key.
+     *
+     * @param array<array-key, mixed> $array
+     * @return array<array-key, list<mixed>>
      */
     public static function groupBy(array $array, string $key): array
     {
         $result = [];
         foreach ($array as $item) {
-            $groupKey = is_array($item) ? ($item[$key] ?? null) : ($item->$key ?? null);
+            $raw = is_array($item) ? ($item[$key] ?? null) : (is_object($item) ? ($item->$key ?? null) : null);
+            $groupKey = (is_int($raw) || is_string($raw)) ? $raw : (string) (is_scalar($raw) ? $raw : '');
             $result[$groupKey][] = $item;
         }
 
