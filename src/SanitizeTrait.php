@@ -1,62 +1,50 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PkDev\Traits;
 
 trait SanitizeTrait
 {
     /**
-     * Cleans a string
-     * @param $value
-     * @return string
+     * Trims a string and strips any HTML tags.
      */
-    public static function sanitizeString($value): string
+    public static function sanitizeString(mixed $value): string
     {
-        $value = trim($value);
-        $value = strip_tags($value);
-        return (string)$value;
+        return strip_tags(trim(is_scalar($value) ? (string) $value : ''));
     }
 
     /**
-     * Clean an email
-     * @param $email
-     * @return string
+     * Sanitizes an email address, returning an empty string when invalid.
      */
-    public static function sanitizeEmail($email): string
+    public static function sanitizeEmail(mixed $email): string
     {
         $sanitizedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
-        return filter_var($sanitizedEmail, FILTER_VALIDATE_EMAIL) ? (string)$sanitizedEmail : '';
+        return filter_var($sanitizedEmail, FILTER_VALIDATE_EMAIL) ? (string) $sanitizedEmail : '';
     }
 
     /**
-     * Clean an int
-     * @param $value
-     * @return int
+     * Sanitizes a value down to an integer.
      */
-    public static function sanitizeInteger($value): int
+    public static function sanitizeInteger(mixed $value): int
     {
-        $value = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
-        return (int)$value;
+        return (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
     }
 
     /**
-     * Clean a float
-     * @param $value
-     * @return float
+     * Sanitizes a value down to a float.
      */
-    public static function sanitizeFloat($value): float
+    public static function sanitizeFloat(mixed $value): float
     {
-        $value = filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        return (float)$value;
+        return (float) filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     }
 
     /**
-     * Cleans a url
-     * @param $url
-     * @return string
+     * Sanitizes a URL, returning an empty string when invalid.
      */
-    public static function sanitizeURL($url): string
+    public static function sanitizeURL(mixed $url): string
     {
-        $url = filter_var($url, FILTER_SANITIZE_URL);
-        return filter_var($url, FILTER_VALIDATE_URL) ? (string)$url : '';
+        $sanitizedUrl = filter_var($url, FILTER_SANITIZE_URL);
+        return filter_var($sanitizedUrl, FILTER_VALIDATE_URL) ? (string) $sanitizedUrl : '';
     }
 }

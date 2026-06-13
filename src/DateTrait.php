@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PkDev\Traits;
 
 use DateTime;
@@ -7,12 +9,11 @@ use DateTime;
 trait DateTrait
 {
     /**
-     * @param $date
-     * @param $format
-     * @return string
+     * Formats a date (string or DateTime, defaulting to now) using the given format.
+     *
      * @throws \Exception
      */
-    public static function formatDate($date = null, $format = 'Y-m-d'): string
+    public static function formatDate(DateTime|string|null $date = null, string $format = 'Y-m-d'): string
     {
         if ($date instanceof DateTime) {
             return $date->format($format);
@@ -26,13 +27,11 @@ trait DateTrait
     }
 
     /**
-     * @param $date
-     * @param $days
-     * @param $format
-     * @return string
+     * Adds (or subtracts) a number of days to a date.
+     *
      * @throws \Exception
      */
-    public static function addDaysToDate($date, $days, $format = 'Y-m-d'): string
+    public static function addDaysToDate(string $date, int $days, string $format = 'Y-m-d'): string
     {
         $dateObj = new DateTime($date);
 
@@ -46,11 +45,11 @@ trait DateTrait
     }
 
     /**
-     * @param $date
-     * @return bool
+     * Determines if a date is in the future.
+     *
      * @throws \Exception
      */
-    public static function isFutureDate($date): bool
+    public static function isFutureDate(string $date): bool
     {
         $currentDate = new DateTime();
         $inputDate = new DateTime($date);
@@ -58,11 +57,11 @@ trait DateTrait
     }
 
     /**
-     * @param $date
-     * @return bool
+     * Determines if a date is in the past.
+     *
      * @throws \Exception
      */
-    public static function isPastDate($date): bool
+    public static function isPastDate(string $date): bool
     {
         $currentDate = new DateTime();
         $inputDate = new DateTime($date);
@@ -70,12 +69,11 @@ trait DateTrait
     }
 
     /**
-     * @param $date1
-     * @param $date2
-     * @return false|int
+     * Returns the number of whole days between two dates.
+     *
      * @throws \Exception
      */
-    public static function getDaysDifference($date1, $date2): int|false
+    public static function getDaysDifference(string $date1, string $date2): int|false
     {
         $dateObj1 = new DateTime($date1);
         $dateObj2 = new DateTime($date2);
@@ -84,12 +82,11 @@ trait DateTrait
     }
 
     /**
-     * @param $date1
-     * @param $date2
-     * @return bool
+     * Determines if two dates are equal.
+     *
      * @throws \Exception
      */
-    public static function areDatesEqual($date1, $date2): bool
+    public static function areDatesEqual(string $date1, string $date2): bool
     {
         $dateObj1 = new DateTime($date1);
         $dateObj2 = new DateTime($date2);
@@ -97,14 +94,13 @@ trait DateTrait
     }
 
     /**
-     * @param $date
-     * @return bool
+     * Determines if a date falls on a weekend.
+     *
      * @throws \Exception
      */
-    public static function isWeekend($date): bool
+    public static function isWeekend(string $date): bool
     {
         $dateObj = new DateTime($date);
-        $dayOfWeek = $dateObj->format('N');
-        return $dayOfWeek >= 6;
+        return (int) $dateObj->format('N') >= 6;
     }
 }

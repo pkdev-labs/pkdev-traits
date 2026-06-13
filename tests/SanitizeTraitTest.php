@@ -10,36 +10,36 @@ class SanitizeTraitTest extends TestCase
     use SanitizeTrait;
 
     /* Sanitize string Tests */
-    public function testSanitizeStringRemovesWhitespace()
+    public function testSanitizeStringRemovesWhitespace(): void
     {
-        $input = "  Hello World  ";
+        $input = '  Hello World  ';
         $result = self::sanitizeString($input);
-        $this->assertEquals("Hello World", $result);
+        $this->assertEquals('Hello World', $result);
     }
 
-    public function testSanitizeStringRemovesHTMLTags()
+    public function testSanitizeStringRemovesHTMLTags(): void
     {
-        $input = "<p>Test <b>string</b></p>";
+        $input = '<p>Test <b>string</b></p>';
         $result = self::sanitizeString($input);
-        $this->assertEquals("Test string", $result);
+        $this->assertEquals('Test string', $result);
     }
 
     /* Sanitize Email Tests */
-    public function testSanitizeValidEmail()
+    public function testSanitizeValidEmail(): void
     {
         $input = 'user@example.com';
         $result = self::sanitizeEmail($input);
         $this->assertEquals('user@example.com', $result);
     }
 
-    public function testSanitizeInvalidEmail()
+    public function testSanitizeInvalidEmail(): void
     {
         $input = 'invalid-email';
         $result = self::sanitizeEmail($input);
         $this->assertEquals('', $result);
     }
 
-    public function testSanitizeEmptyEmail()
+    public function testSanitizeEmptyEmail(): void
     {
         $input = '';
         $result = self::sanitizeEmail($input);
@@ -47,21 +47,21 @@ class SanitizeTraitTest extends TestCase
     }
 
     /* Sanitize Integer Tests */
-    public function testSanitizeValidInteger()
+    public function testSanitizeValidInteger(): void
     {
         $input = '123';
         $result = self::sanitizeInteger($input);
         $this->assertEquals(123, $result);
     }
 
-    public function testSanitizeInvalidInteger()
+    public function testSanitizeInvalidInteger(): void
     {
         $input = 'abc123';
         $result = self::sanitizeInteger($input);
         $this->assertEquals(123, $result);
     }
 
-    public function testSanitizeEmptyInteger()
+    public function testSanitizeEmptyInteger(): void
     {
         $input = '';
         $result = self::sanitizeInteger($input);
@@ -69,21 +69,21 @@ class SanitizeTraitTest extends TestCase
     }
 
     /* Sanitize Float Tests */
-    public function testSanitizeValidFloat()
+    public function testSanitizeValidFloat(): void
     {
         $input = '123.45';
         $result = self::sanitizeFloat($input);
         $this->assertEquals(123.45, $result);
     }
 
-    public function testSanitizeInvalidFloat()
+    public function testSanitizeInvalidFloat(): void
     {
         $input = 'abc123.45';
         $result = self::sanitizeFloat($input);
         $this->assertEquals(123.45, $result);
     }
 
-    public function testSanitizeEmptyFloat()
+    public function testSanitizeEmptyFloat(): void
     {
         $input = '';
         $result = self::sanitizeFloat($input);
@@ -91,21 +91,21 @@ class SanitizeTraitTest extends TestCase
     }
 
     /* Sanitize URL Tests */
-    public function testSanitizeValidURL()
+    public function testSanitizeValidURL(): void
     {
         $input = 'https://example.com';
         $result = self::sanitizeURL($input);
         $this->assertEquals('https://example.com', $result);
     }
 
-    public function testSanitizeInvalidURL()
+    public function testSanitizeInvalidURL(): void
     {
         $input = 'invalid-url';
         $result = self::sanitizeURL($input);
         $this->assertEquals('', $result); // Returns an empty string for invalid URL
     }
 
-    public function testSanitizeEmptyURL()
+    public function testSanitizeEmptyURL(): void
     {
         $input = '';
         $result = self::sanitizeURL($input);
