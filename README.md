@@ -130,8 +130,8 @@ Quality tooling:
 
 ```bash
 composer test            # PHPUnit (100% coverage enforced in CI)
-composer analyse         # PHPStan, level max
-composer check           # test + analyse
+composer analyze         # PHPStan, level max
+composer check           # test + analyze
 
 # Coding standards run as a standalone PHAR (not a Composer dependency):
 php php-cs-fixer.phar fix --dry-run --diff   # check

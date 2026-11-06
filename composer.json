@@ -24,10 +24,10 @@
     "scripts": {
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
-        "analyse": "vendor/bin/phpstan analyse",
+        "analyze": "vendor/bin/phpstan analyse",
         "check": [
             "@test",
-            "@analyse"
+            "@analyze"
         ]
     },
     "keywords": ["traits", "php"],
